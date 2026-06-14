@@ -1,0 +1,54 @@
+# ============================================================
+#  requirements.txt  —  Office Attendance & Tracking System
+#  Phase 3: Multi-Camera Tracking + ReID + Activity
+#
+#  GPU install (NVIDIA — recommended for RTX 3050):
+#    pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#    pip install onnxruntime-gpu>=1.17.0
+#    pip install -r requirements.txt
+#
+#  CPU-only fallback:
+#    pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+#    pip install onnxruntime>=1.17.0
+#    Set USE_GPU = False in config.py
+#
+#  For torchreid (OSNet ReID — NOT on PyPI):
+#    pip install git+https://github.com/KaiyangZhou/deep-person-reid.git
+# ============================================================
+
+# ── Core Vision ─────────────────────────────────────────────
+opencv-python>=4.9.0
+
+# ── Face Recognition (InsightFace ArcFace) ──────────────────
+insightface>=0.7.3
+onnxruntime-gpu>=1.17.0       # NVIDIA GPU inference for InsightFace
+
+# ── YOLO — Person + Object Detection ────────────────────────
+ultralytics>=8.0.0
+
+# ── ByteTrack (via boxmot — pip-installable) ────────────────
+boxmot>=10.0.0
+
+# ── Person Re-Identification (OSNet) ────────────────────────
+# torchreid is NOT on PyPI. Install with:
+#   pip install git+https://github.com/KaiyangZhou/deep-person-reid.git
+
+# ── PyTorch (CUDA 12.1 — install separately, see header) ────
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+torchvision>=0.15.0
+
+# ── Data + Database ─────────────────────────────────────────
+numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.4.0
+openpyxl>=3.1.0
+SQLAlchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# ── Web Dashboard ────────────────────────────────────────────
+flask>=3.0.0
+
+# ── Utilities ────────────────────────────────────────────────
+Pillow>=10.2.0
+schedule>=1.2.1
