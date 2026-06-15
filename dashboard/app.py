@@ -2,12 +2,7 @@
 #  dashboard/app.py  —  Web Dashboard (Phase 3)
 #
 #  New in Phase 3:
-#    • Live Tracking tab — real-time per-employee presence table
-#      showing: Name | ID | Camera | Activity | Entry | Duration
 #    • Camera status includes all 4 cameras
-#    • Activity tab now uses tracking_db data (per-employee)
-#    • /api/live_tracking  — new endpoint
-#    • /api/tracking_history/<global_id>  — new endpoint
 # =============================================================
 
 import sys
@@ -645,7 +640,6 @@ DASHBOARD_HTML = r"""
   {% endif %}
   <div class="tab {% if hide_cameras %}active{% endif %}" id="nav-tab-attendance" onclick="showTab('tab-attendance')">Daily Dashboard</div>
   <div class="tab" id="nav-tab-monthly" onclick="showTab('tab-monthly')">Monthly Reports</div>
-
 </div>
 
 <div class="main">
@@ -662,55 +656,6 @@ DASHBOARD_HTML = r"""
     </div>
   </div>
   {% endif %}
-
-  <!-- ══════════════════ LIVE TRACKING ══════════════════ -->
-  <div id="tab-live" class="page">
-    <div class="stat-row">
-      <div class="stat-card">
-        <div class="stat-label">Tracked Now</div>
-        <div class="stat-value" id="live-present">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Present</div>
-        <div class="stat-value" id="live-working" style="color:var(--success)">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Working</div>
-        <div class="stat-value" id="live-idle">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Not Visible</div>
-        <div class="stat-value" id="live-verified" style="color:var(--danger)">0</div>
-      </div>
-    </div>
-
-    <div class="table-wrap">
-      <div class="section-head" style="padding:16px 18px 0;">
-        <div class="section-title">Live Employee Tracking</div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span style="color:var(--text-muted);font-size:12px;" id="live-updated">Auto-refreshing</span>
-          <button onclick="loadLive()">Refresh Now</button>
-        </div>
-      </div>
-      <table style="margin-top:12px;">
-        <thead>
-          <tr>
-            <th>Employee</th>
-            <th>Employee ID</th>
-            <th>Status</th>
-            <th>Current Camera</th>
-            <th>Current Activity</th>
-            <th>First Seen</th>
-            <th>Last Seen</th>
-          </tr>
-        </thead>
-        <tbody id="live-body">
-          <tr><td colspan="7" class="empty">Waiting for live tracking data...</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12px;color:var(--text-muted);padding:10px 14px;">Updates every 5 seconds. Identity stays consistent across all 4 cameras via face recognition and person re-identification.</p>
-    </div>
-  </div>
 
   <!-- ══════════════════ DAILY DASHBOARD ══════════════════ -->
   <div id="tab-attendance" class="page {% if hide_cameras %}active{% endif %}">
@@ -748,7 +693,7 @@ DASHBOARD_HTML = r"""
           </tr>
         </thead>
         <tbody id="att-body">
-          <tr><td colspan="6" class="empty">Loading daily data...</td></tr>
+          <tr><td colspan="4" class="empty">Loading daily data...</td></tr>
         </tbody>
       </table>
       <p style="font-size:12px;color:var(--text-muted);padding:10px 14px;">Automatically updates every 30 seconds.</p>

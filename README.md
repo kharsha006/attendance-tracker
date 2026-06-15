@@ -1,6 +1,6 @@
-# Office Attendance & Tracking System (Phase 3)
+# Office Attendance System (Phase 3)
 
-A high-performance, multi-camera employee attendance and activity tracking system built with Python, InsightFace, YOLOv8, and MongoDB.
+A high-performance, multi-camera employee attendance system built with Python, InsightFace, and MongoDB.
 
 This project is architected to run in a **split deployment** mode:
 1. **Local Camera Monitor**: A heavy AI processing engine that runs on a local PC connected to the office network cameras (operating automatically from 9 AM to 9 PM to save resources).
@@ -9,19 +9,18 @@ This project is architected to run in a **split deployment** mode:
 ## 🌟 Key Features
 
 * **Advanced Face Recognition**: Upgraded to **InsightFace (ArcFace 512-d)** for state-of-the-art accuracy, replacing the older MTCNN+Facenet pipeline.
-* **Multi-Camera Processing**: Connect multiple RTSP/IP cameras to track entries, exits, and continuous office presence.
-* **Person Re-Identification (ReID)**: Uses YOLOv8 + ByteTrack + OSNet to maintain consistent identities across different cameras without needing to see the face constantly.
+* **Multi-Camera Processing**: Connect multiple RTSP/IP cameras to track entries and exits.
 * **MongoDB Integration**: Completely migrated from SQLite to MongoDB to support distributed cloud deployment and high-speed logging.
 * **Anti-Spoofing & Liveness Detection**: Prevents attendance fraud (e.g., holding up a photo) via a secondary AI liveness check.
 * **Automated Email Alerts**: Sends SMTP email alerts to the admin when an unknown person is detected or if a camera goes offline.
-* **Beautiful HR Dashboard**: A responsive, modern Flask web interface built without complex frontend frameworks (Vanilla HTML/CSS/JS). Features live tracking, daily summaries, and Excel report exports.
+* **Beautiful HR Dashboard**: A responsive, modern Flask web interface built without complex frontend frameworks (Vanilla HTML/CSS/JS). Features daily attendance summaries and Excel report exports.
 
 ## 🏗️ Architecture
 
 ```mermaid
 graph LR
     A[RTSP Cameras] -->|Live Feed| B(Local AI Monitor)
-    B -->|InsightFace + YOLO| B
+    B -->|InsightFace| B
     B -->|Logs Events| C[(MongoDB Atlas)]
     C -->|Reads Data| D(Cloud Dashboard)
     D -->|Displays| E[HR / Admin]
