@@ -636,7 +636,7 @@ DASHBOARD_HTML = r"""
 <!-- Tabs -->
 <div class="tabs">
   {% if not hide_cameras %}
-  <div class="tab active" id="nav-tab-cameras" onclick="showTab('tab-cameras')">📷 Live Cameras</div>
+  <div class="tab active" id="nav-tab-cameras" onclick="showTab('tab-cameras')">Live Cameras</div>
   {% endif %}
   <div class="tab {% if hide_cameras %}active{% endif %}" id="nav-tab-attendance" onclick="showTab('tab-attendance')">Daily Dashboard</div>
   <div class="tab" id="nav-tab-monthly" onclick="showTab('tab-monthly')">Monthly Reports</div>
